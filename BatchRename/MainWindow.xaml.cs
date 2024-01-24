@@ -409,14 +409,19 @@ namespace BatchRename
 
             int index = listRules.SelectedIndex;
 
-            var rule = _listRule[index].Clone();
-            bool choseAdd = true;
-            if (rule.isEditable())
-            {
-                if (rule.showUI() == false)
-                    choseAdd = false;
-            }
-            if (choseAdd)
+            //if (rule.isEditable())
+            //{
+            //    if (rule.showUI() == false)
+            //        choseAdd = false;
+            //}
+
+            // Call plugin manager to create a rule
+            // Currently just work with add prefix rule
+            Request item = new Request();
+            item.m_mid = BrMethods.BR_MID_ADD_PREFIX_ADD_RULE_CLICK;
+            var rule = (PluginManager.getInstance().Handle(item)) as IRule;
+
+            if (rule != null)
             {
                 _chosenRule.Add(rule);
                 rulesListBox.ItemsSource = null;
@@ -590,7 +595,14 @@ namespace BatchRename
                 item.newItemName = item.itemName;
             foreach (IRule rule in _chosenRule)
             {
-                rule.Rename(list, isFile);
+                Request in_resource = new Request();
+                in_resource.m_mid = BrMethods.BR_MID_ADD_PREFIX_RENAME;
+                in_resource.m_params = new Dictionary<string, object>();
+                in_resource.m_params.Add("list", list);
+                in_resource.m_params.Add("is_file", isFile);
+                in_resource.m_params.Add("params", rule.Parameter);
+                PluginManager.getInstance().Handle(in_resource);
+                //rule.Rename(list, isFile);
                 foreach (Item item in list)
                     item.itemName = item.newItemName;
             }
