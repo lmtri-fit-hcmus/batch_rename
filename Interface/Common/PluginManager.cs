@@ -18,6 +18,18 @@ namespace Internal
         {
             return 0 < mid && mid <= BrMethods.BR_MID_END_GENERAL;
         }
+        public static ObservableCollection<RuleFormat> GetPLuginsName()
+        {
+            ObservableCollection<RuleFormat> res = new ObservableCollection<RuleFormat>();
+            List<Dictionary<string, object>> config = PluginConfig.Get();
+            foreach (var plugin in config)
+            {
+                var newRule = new RuleFormat();
+                newRule.ruleName = plugin[BrConstants.BR_KEY_NAME].ToString();
+                res.Add(newRule);
+            }
+            return res;
+        }
         public static object HandleGeneralMethodID(int mid)
         {
             switch (mid)
@@ -25,6 +37,8 @@ namespace Internal
                 case BrMethods.BR_MID_TEAR_DOWN:
 
                     break;
+                case BrMethods.BR_MID_GET_PLUGINS_INFO:
+                    return Internal.GetPLuginsName();
             }
             return null;
         }

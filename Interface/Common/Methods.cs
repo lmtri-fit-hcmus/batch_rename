@@ -14,7 +14,10 @@ namespace BatchRename
 
     public static class BrMethods
     {
-        public const int BR_MID_TEAR_DOWN                       = 0;
+        public const int BR_MID_FIRST_GENERAL                   = 0;
+        public const int BR_MID_TEAR_DOWN                       = BR_MID_FIRST_GENERAL;
+        public const int BR_MID_GET_PLUGINS_INFO                = BR_MID_FIRST_GENERAL + 1;
+        public const int BR_MID_END_GENERAL                     = 99;
         /*
          * Plugin: Add Prefix 
          * Method range: 100-150
