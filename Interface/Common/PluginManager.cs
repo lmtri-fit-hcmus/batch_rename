@@ -1,11 +1,49 @@
 ﻿using BatchRename;
+using Interface;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.WebRequestMethods;
+
+namespace Internal
+{
+    class Internal
+    {
+        public static bool IsGeneralMethodID(int mid)
+        {
+            return 0 < mid && mid <= BrMethods.BR_MID_END_GENERAL;
+        }
+        public static ObservableCollection<RuleFormat> GetPLuginsName()
+        {
+            ObservableCollection<RuleFormat> res = new ObservableCollection<RuleFormat>();
+            List<Dictionary<string, object>> config = PluginConfig.Get();
+            foreach (var plugin in config)
+            {
+                var newRule = new RuleFormat();
+                newRule.ruleName = plugin[BrConstants.BR_KEY_NAME].ToString();
+                res.Add(newRule);
+            }
+            return res;
+        }
+        public static object HandleGeneralMethodID(int mid)
+        {
+            switch (mid)
+            {
+                case BrMethods.BR_MID_TEAR_DOWN:
+
+                    break;
+                case BrMethods.BR_MID_GET_PLUGINS_INFO:
+                    return Internal.GetPLuginsName();
+            }
+            return null;
+        }
+    }
+}
 
 namespace BatchRename
 {
@@ -46,7 +84,7 @@ namespace BatchRename
             //generate instance failed
             return null;
         }
-        
+
         //handle <name>, <input> request
         public object handle(Request input, string name)
         {
@@ -77,7 +115,7 @@ namespace BatchRename
             return true;
         }
     }
-    
+
     //This class used for dispatch request from plugin manager to its plugin by METHOD_ID
     public class PluginDispatcher
     {
@@ -109,6 +147,9 @@ namespace BatchRename
         //Dispatch request to its plugin
         public object Dispatch(Request input)
         {
+            if (Internal.Internal.IsGeneralMethodID(input.m_mid)) { 
+                return Internal.Internal.HandleGeneralMethodID(input.m_mid);
+            }
             // Find its plugin by parsing method_id
             int plugin_idx = 0;
             for (; plugin_idx < _first_mid_list.Count; plugin_idx++)
@@ -128,7 +169,7 @@ namespace BatchRename
             }
 
             // After find index of plugin => Pass this request to this plugin
-         
+
             Instance ins = _instance_list[plugin_idx];
             //If plugin generated
             if (ins != null)

@@ -43,7 +43,7 @@ namespace BatchRename
 
         ObservableCollection<Item> _listFile = new ObservableCollection<Item>();
         ObservableCollection<Item> _listFolder = new ObservableCollection<Item>();
-        ObservableCollection<IRule> _listRule = new ObservableCollection<IRule>();
+        ObservableCollection<RuleFormat> _listRule = new ObservableCollection<RuleFormat>();
         ObservableCollection<IRule> _chosenRule = new ObservableCollection<IRule>();
 
         const String ALL_FILE = "All Files from Folder";
@@ -56,25 +56,29 @@ namespace BatchRename
         {
             // _listFile = e.Data.GetData(DataFormats.FileDrop, true);
 
-            var exeFolder = AppDomain.CurrentDomain.BaseDirectory;
-            var dlls = new DirectoryInfo(exeFolder).GetFiles("dllRules/*.dll");
-            foreach (var dll in dlls)
-            {
-                var assembly = Assembly.LoadFile(dll.FullName);
-                var types = assembly.GetTypes();
+            //var exeFolder = AppDomain.CurrentDomain.BaseDirectory;
+            //var dlls = new DirectoryInfo(exeFolder).GetFiles("dllRules/*.dll");
+            //foreach (var dll in dlls)
+            //{
+            //    var assembly = Assembly.LoadFile(dll.FullName);
+            //    var types = assembly.GetTypes();
 
-                foreach (var type in types)
-                {
-                    if (type.IsClass)
-                    {
-                        if (typeof(IRule).IsAssignableFrom(type))
-                        {
-                            var temp_rule = Activator.CreateInstance(type) as IRule;
-                            _listRule.Add(temp_rule);
-                        }
-                    }
-                }
-            }
+            //    foreach (var type in types)
+            //    {
+            //        if (type.IsClass)
+            //        {
+            //            if (typeof(IRule).IsAssignableFrom(type))
+            //            {
+            //                var temp_rule = Activator.CreateInstance(type) as IRule;
+            //                _listRule.Add(temp_rule);
+            //            }
+            //        }
+            //    }
+            //}
+            // 
+            Request item = new Request();
+            item.m_mid = BrMethods.BR_MID_GET_PLUGINS_INFO;
+            _listRule = (PluginManager.getInstance().Handle(item)) as ObservableCollection<RuleFormat>;
 
             ComboType.ItemsSource = itemType;
             listRules.ItemsSource = _listRule;
@@ -819,17 +823,17 @@ namespace BatchRename
                 foreach (RuleFormat rule in rules)
                 {
                     {
-                        foreach (IRule item in _listRule)
+                        foreach (RuleFormat item in _listRule)
                         {
                             if (item.ruleName == rule.ruleName)
                             {
-                                IRule target = item.Clone();
-                                target.ruleDescription = rule.ruleDescription;
-                                target.Parameter = rule.Parameter;
-                                target.counter = rule.counter;
-                                target.Replace = rule.Replace;
+                                //IRule target = item.Clone();
+                                //target.ruleDescription = rule.ruleDescription;
+                                //target.Parameter = rule.Parameter;
+                                //target.counter = rule.counter;
+                                //target.Replace = rule.Replace;
 
-                                this._chosenRule.Add(target);
+                                //this._chosenRule.Add(target);
                             }
                         }
                     }
@@ -936,17 +940,17 @@ namespace BatchRename
                 foreach (RuleFormat rule in Project.rules)
                 {
                     {
-                        foreach (IRule item in _listRule)
+                        foreach (RuleFormat item in _listRule)
                         {
                             if (item.ruleName == rule.ruleName)
                             {
-                                IRule target = item.Clone();
-                                target.ruleDescription = rule.ruleDescription;
-                                target.Parameter = rule.Parameter;
-                                target.counter = rule.counter;
-                                target.Replace = rule.Replace;
+                                //IRule target = item.Clone();
+                                //target.ruleDescription = rule.ruleDescription;
+                                //target.Parameter = rule.Parameter;
+                                //target.counter = rule.counter;
+                                //target.Replace = rule.Replace;
 
-                                this._chosenRule.Add(target);
+                                //this._chosenRule.Add(target);
                             }
                         }
                     }
