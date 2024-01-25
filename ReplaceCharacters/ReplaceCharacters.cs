@@ -73,7 +73,7 @@ namespace BatchRename
             Parameter = new List<string>();
             Parameter.Add("");
             Parameter.Add("");
-            ruleName = "Replace characters";
+            ruleName = BrMethods.BR_REPLACE_CHARACTERS_NAME;
             ruleDescription = "Replace " + Parameter[0] + " characters into " + Parameter[1];
             counter = new List<int>();
             counter.Add(0);

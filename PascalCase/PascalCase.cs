@@ -60,7 +60,7 @@ string _replace, List<int> _counter)
         }
         public _PascalCase()
         {
-            ruleName = "PascalCase";
+            ruleName = BrMethods.BR_PASCAL_CASE_NAME;
             ruleDescription = "Convert filename to PascalCase";
         }
 

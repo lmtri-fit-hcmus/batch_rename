@@ -68,7 +68,7 @@ string _replace, List<int> _counter)
         {
             Parameter = new List<string>();
             Parameter.Add("");
-            ruleName = "Remove all space begin and end";
+            ruleName = BrMethods.BR_REMOVE_ALL_SPACE_FROM_BEGIN_AND_END_NAME;
             ruleDescription = "Remove all space from the beginning and the ending of the filename";
             counter = new List<int>();
             counter.Add(0);
