@@ -119,10 +119,10 @@ namespace BatchRename
     //This class used for dispatch request from plugin manager to its plugin by METHOD_ID
     public class PluginDispatcher
     {
-        private List<int> _first_mid_list        = new List<int>();
-        private List<int> _last_mid_list         = new List<int>();
-        private List<string> _plugin_name        = new List<string>();
-        private List<Instance> _instance_list    = new List<Instance>();
+        private List<int> _first_mid_list = new List<int>();
+        private List<int> _last_mid_list = new List<int>();
+        private List<string> _plugin_name = new List<string>();
+        private List<Instance> _instance_list = new List<Instance>();
 
         /*
          *  Load all module defined in config file.
@@ -147,7 +147,8 @@ namespace BatchRename
         //Dispatch request to its plugin
         public object Dispatch(Request input)
         {
-            if (Internal.Internal.IsGeneralMethodID(input.m_mid)) { 
+            if (Internal.Internal.IsGeneralMethodID(input.m_mid))
+            {
                 return Internal.Internal.HandleGeneralMethodID(input.m_mid);
             }
             // Find its plugin by parsing method_id
@@ -191,7 +192,7 @@ namespace BatchRename
     public class PluginManager : IPlugin
     {
         //return code of plugin
-        static int g_plugin_rc               = 1;
+        static int g_plugin_rc = 1;
         private PluginDispatcher _dispatcher = new PluginDispatcher();
         static PluginManager _instance = null;
         public PluginManager()
@@ -212,7 +213,7 @@ namespace BatchRename
         }
         public object Handle(Request input)
         {
-            if(g_plugin_rc == 0)
+            if (g_plugin_rc == 0)
             {
                 return null; // dispatcher is not loaded config
             }

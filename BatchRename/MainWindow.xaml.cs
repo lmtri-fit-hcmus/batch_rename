@@ -421,7 +421,7 @@ namespace BatchRename
             var rule = _listRule[index];
             Request item = new Request();
             item.m_mid = PluginCloneMethodFactory.createMid(rule.ruleName);
-             rule = (PluginManager.getInstance().Handle(item)) as RuleFormat;
+            rule = (PluginManager.getInstance().Handle(item)) as RuleFormat;
 
             if (rule != null)
             {
