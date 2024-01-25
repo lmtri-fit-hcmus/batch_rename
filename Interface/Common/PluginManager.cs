@@ -60,7 +60,7 @@ namespace BatchRename
         static public Instance CreateInstance(string pluginName)
         {
             //var exeFolder = AppDomain.CurrentDomain.BaseDirectory;
-            var exeFolder = "G:/Data/Source/HCMUS/batch_rename/AddPrefixRule/bin/Debug/net6.0-windows/"; //hard code dll folder for debugging
+            var exeFolder = "C:\\Users\\ADMIN\\OneDrive - VNU-HCMUS\\Desktop\\KienTruc\\batch_rename\\AddPrefixRule\\bin\\Debug\\net6.0-windows"; //hard code dll folder for debugging
             var dlls = new DirectoryInfo(exeFolder).GetFiles(pluginName + ".dll");
             if (dlls.Length == 0)
             {
