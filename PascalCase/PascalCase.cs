@@ -27,10 +27,10 @@ namespace BatchRename
                     {
                         if (cloneRule.showUI() == false)
                             return null;
-                        return cloneRule;
+                        return RuleFormatAdapter.changeToRuleFormat(cloneRule); ;
                     }
                     else if (cloneRule != null)
-                        return cloneRule;
+                        return RuleFormatAdapter.changeToRuleFormat(cloneRule); ;
                     return null;
             }
             return true;
