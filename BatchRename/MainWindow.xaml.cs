@@ -26,6 +26,7 @@ using System.Text.Json;
 using System.Windows.Shapes;
 using DataFormats = System.Windows.Forms.DataFormats;
 using DragDropEffects = System.Windows.DragDropEffects;
+using Interface.Common;
 
 namespace BatchRename
 {
@@ -43,8 +44,8 @@ namespace BatchRename
 
         ObservableCollection<Item> _listFile = new ObservableCollection<Item>();
         ObservableCollection<Item> _listFolder = new ObservableCollection<Item>();
-        ObservableCollection<IRule> _listRule = new ObservableCollection<IRule>();
-        ObservableCollection<IRule> _chosenRule = new ObservableCollection<IRule>();
+        ObservableCollection<RuleFormat> _listRule = new ObservableCollection<RuleFormat>();
+        ObservableCollection<RuleFormat> _chosenRule = new ObservableCollection<RuleFormat>();
 
         const String ALL_FILE = "All Files from Folder";
         BindingList<string> itemType = new BindingList<string>()
@@ -56,25 +57,30 @@ namespace BatchRename
         {
             // _listFile = e.Data.GetData(DataFormats.FileDrop, true);
 
-            var exeFolder = AppDomain.CurrentDomain.BaseDirectory;
-            var dlls = new DirectoryInfo(exeFolder).GetFiles("dllRules/*.dll");
-            foreach (var dll in dlls)
-            {
-                var assembly = Assembly.LoadFile(dll.FullName);
-                var types = assembly.GetTypes();
+            //var exeFolder = AppDomain.CurrentDomain.BaseDirectory;
+            //var dlls = new DirectoryInfo(exeFolder).GetFiles("dllRules/*.dll");
+            //foreach (var dll in dlls)
+            //{
+            //    var assembly = Assembly.LoadFile(dll.FullName);
+            //    var types = assembly.GetTypes();
 
-                foreach (var type in types)
-                {
-                    if (type.IsClass)
-                    {
-                        if (typeof(IRule).IsAssignableFrom(type))
-                        {
-                            var temp_rule = Activator.CreateInstance(type) as IRule;
-                            _listRule.Add(temp_rule);
-                        }
-                    }
-                }
-            }
+            //    foreach (var type in types)
+            //    {
+            //        if (type.IsClass)
+            //        {
+            //            if (typeof(IRule).IsAssignableFrom(type))
+            //            {
+            //                var temp_rule = Activator.CreateInstance(type) as IRule;
+            //                _listRule.Add(temp_rule);
+            //            }
+            //        }
+            //    }
+            //}
+            // 
+
+            Request item = new Request();
+            item.m_mid = BrMethods.BR_MID_GET_PLUGINS_INFO;
+            _listRule = (PluginManager.getInstance().Handle(item)) as ObservableCollection<RuleFormat>;
 
             ComboType.ItemsSource = itemType;
             listRules.ItemsSource = _listRule;
@@ -409,17 +415,13 @@ namespace BatchRename
 
             int index = listRules.SelectedIndex;
 
-            //if (rule.isEditable())
-            //{
-            //    if (rule.showUI() == false)
-            //        choseAdd = false;
-            //}
-
             // Call plugin manager to create a rule
             // Currently just work with add prefix rule
+
+            var rule = _listRule[index];
             Request item = new Request();
-            item.m_mid = BrMethods.BR_MID_REPLACE_CHARACTERS_ADD_RULE_CLICK;
-            var rule = (PluginManager.getInstance().Handle(item)) as IRule;
+            item.m_mid = PluginCloneMethodFactory.createMid(rule.ruleName);
+            rule = (PluginManager.getInstance().Handle(item)) as RuleFormat;
 
             if (rule != null)
             {
@@ -437,10 +439,10 @@ namespace BatchRename
             int index = rulesListBox.SelectedIndex;
             var rule = _chosenRule[index];
             txt_description.Text = rule.ruleDescription;
-            if (rule.isEditable())
-            {
-                buttonEdit.Visibility = Visibility.Visible;
-            }
+            //if (rule.isEditable())
+            //{
+            //    buttonEdit.Visibility = Visibility.Visible;
+            //}
 
         }
 
@@ -448,13 +450,13 @@ namespace BatchRename
         {
             if (rulesListBox.SelectedItem == null)
                 return;
-            int index = rulesListBox.SelectedIndex;
-            var rule = _chosenRule[index].Clone();
-            if (rule.showUI() == true)
-            {
-                _chosenRule[index] = rule;
-                txt_description.Text = rule.ruleDescription;
-            }
+            //int index = rulesListBox.SelectedIndex;
+            //var rule = _chosenRule[index].Clone();
+            //if (rule.showUI() == true)
+            //{
+            //    _chosenRule[index] = rule;
+            //    txt_description.Text = rule.ruleDescription;
+            //}
 
         }
 
@@ -496,7 +498,7 @@ namespace BatchRename
             int index = rulesListBox.SelectedIndex;
             if (index != -1)
             {
-                IRule temp = _chosenRule[index];
+                RuleFormat temp = _chosenRule[index];
                 for (int i = index; i > 0; i--)
                 {
                     _chosenRule[i] = _chosenRule[i - 1];
@@ -511,7 +513,7 @@ namespace BatchRename
             int index = rulesListBox.SelectedIndex;
             if (index != -1)
             {
-                IRule temp = _chosenRule[index];
+                RuleFormat temp = _chosenRule[index];
                 for (int i = index; i < _chosenRule.Count - 1; i++)
                 {
                     _chosenRule[i] = _chosenRule[i + 1];
@@ -526,7 +528,7 @@ namespace BatchRename
             int index = rulesListBox.SelectedIndex;
             if (index != -1 && index != 0)
             {
-                IRule temp = _chosenRule[index];
+                RuleFormat temp = _chosenRule[index];
                 _chosenRule[index] = _chosenRule[index - 1];
                 _chosenRule[index - 1] = temp;
                 rulesListBox.SelectedIndex = index - 1;
@@ -539,7 +541,7 @@ namespace BatchRename
 
             if (index != -1 && index != _chosenRule.Count - 1)
             {
-                IRule temp = _chosenRule[index];
+                RuleFormat temp = _chosenRule[index];
                 _chosenRule[index] = _chosenRule[index + 1];
                 _chosenRule[index + 1] = temp;
 
@@ -593,16 +595,15 @@ namespace BatchRename
 
             foreach (Item item in list)
                 item.newItemName = item.itemName;
-            foreach (IRule rule in _chosenRule)
+            foreach (RuleFormat rule in _chosenRule)
             {
                 Request in_resource = new Request();
-                in_resource.m_mid = BrMethods.BR_MID_REPLACE_CHARACTERS_RENAME;
+                in_resource.m_mid = PluginRenameMethodFactory.createMid(rule.ruleName);
                 in_resource.m_params = new Dictionary<string, object>();
                 in_resource.m_params.Add("list", list);
                 in_resource.m_params.Add("is_file", isFile);
                 in_resource.m_params.Add("params", rule.Parameter);
                 PluginManager.getInstance().Handle(in_resource);
-                //rule.Rename(list, isFile);
                 foreach (Item item in list)
                     item.itemName = item.newItemName;
             }
@@ -819,17 +820,17 @@ namespace BatchRename
                 foreach (RuleFormat rule in rules)
                 {
                     {
-                        foreach (IRule item in _listRule)
+                        foreach (RuleFormat item in _listRule)
                         {
                             if (item.ruleName == rule.ruleName)
                             {
-                                IRule target = item.Clone();
-                                target.ruleDescription = rule.ruleDescription;
-                                target.Parameter = rule.Parameter;
-                                target.counter = rule.counter;
-                                target.Replace = rule.Replace;
+                                //IRule target = item.Clone();
+                                //target.ruleDescription = rule.ruleDescription;
+                                //target.Parameter = rule.Parameter;
+                                //target.counter = rule.counter;
+                                //target.Replace = rule.Replace;
 
-                                this._chosenRule.Add(target);
+                                //this._chosenRule.Add(target);
                             }
                         }
                     }
@@ -936,17 +937,17 @@ namespace BatchRename
                 foreach (RuleFormat rule in Project.rules)
                 {
                     {
-                        foreach (IRule item in _listRule)
+                        foreach (RuleFormat item in _listRule)
                         {
                             if (item.ruleName == rule.ruleName)
                             {
-                                IRule target = item.Clone();
-                                target.ruleDescription = rule.ruleDescription;
-                                target.Parameter = rule.Parameter;
-                                target.counter = rule.counter;
-                                target.Replace = rule.Replace;
+                                //IRule target = item.Clone();
+                                //target.ruleDescription = rule.ruleDescription;
+                                //target.Parameter = rule.Parameter;
+                                //target.counter = rule.counter;
+                                //target.Replace = rule.Replace;
 
-                                this._chosenRule.Add(target);
+                                //this._chosenRule.Add(target);
                             }
                         }
                     }
