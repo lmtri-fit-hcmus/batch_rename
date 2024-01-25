@@ -16,9 +16,12 @@ namespace BatchRename
                 // entry for add prefix plugin
                 new  Dictionary<string, object>
                 {
-                    { BrConstants.BR_KEY_FIRST_MID, BrMethods.BR_MID_START_ADD_PREFIX },
-                    { BrConstants.BR_KEY_LAST_MID,  BrMethods.BR_MID_END_ADD_PREFIX },
-                    { BrConstants.BR_KEY_NAME,    BrMethods.BR_ADD_PREFIX_NAME }
+                    /* { BrConstants.BR_KEY_FIRST_MID, BrMethods.BR_MID_START_PASCAL_CASE },
+                    { BrConstants.BR_KEY_LAST_MID,  BrMethods.BR_MID_END_PASCAL_CASE },
+                    { BrConstants.BR_KEY_NAME,    BrMethods.BR_PASCAL_CASE } */
+                    { BrConstants.BR_KEY_FIRST_MID, 100 },
+                    { BrConstants.BR_KEY_LAST_MID,  1000 },
+                    { BrConstants.BR_KEY_NAME,    BrMethods.BR_REPLACE_CHARACTERS }
                 },
                 // Add more entries for
             };

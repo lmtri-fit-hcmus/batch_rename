@@ -6,7 +6,38 @@ using System.Windows.Media.Media3D;
 
 namespace BatchRename
 {
-    public class PascalCase : IRule
+    public class PascalCase : IPlugin
+    {
+        public object Handle(Request item)
+        {
+            switch (item.m_mid)
+            {
+                case BrMethods.BR_MID_PASCAL_CASE_RENAME:
+                    bool isFile = Convert.ToBoolean(item.m_params["is_file"]);
+                    ObservableCollection<Item> list = item.m_params["list"] as ObservableCollection<Item>;
+                    List<string> paramRule = item.m_params["params"] as List<string>;
+                    _PascalCase renameRule = new _PascalCase();
+                    renameRule.Parameter = paramRule;
+                    renameRule.Rename(list, isFile);
+                    break;
+
+                case BrMethods.BR_MID_PASCAL_CASE_ADD_RULE_CLICK:
+                    var cloneRule = new _PascalCase();
+                    if (cloneRule.isEditable())
+                    {
+                        if (cloneRule.showUI() == false)
+                            return null;
+                        return cloneRule;
+                    }
+                    else if (cloneRule != null)
+                        return cloneRule;
+                    return null;
+            }
+            return true;
+        }
+    }
+
+    public class _PascalCase : IRule
     {
         public string ruleName { get; set; }
         public string ruleDescription { get; set; }
@@ -14,7 +45,7 @@ namespace BatchRename
         public string Replace { get; set; }
         public List<int> counter { get; set; }
 
-        public PascalCase(string _rulename, string _ruleDescription, List<string> _parameter,
+        public _PascalCase(string _rulename, string _ruleDescription, List<string> _parameter,
 string _replace, List<int> _counter)
         {
             ruleName = _rulename;
@@ -27,7 +58,7 @@ string _replace, List<int> _counter)
         {
             return false;
         }
-        public PascalCase()
+        public _PascalCase()
         {
             ruleName = "PascalCase";
             ruleDescription = "Convert filename to PascalCase";
@@ -35,11 +66,10 @@ string _replace, List<int> _counter)
 
         public IRule Clone()
         {
-            PascalCase clone = new PascalCase();
+            _PascalCase clone = new _PascalCase();
             clone.Parameter = Parameter;
             return clone;
         }
-
 
         public void Rename(ObservableCollection<Item> list, bool isFile)
         {

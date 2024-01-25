@@ -418,7 +418,7 @@ namespace BatchRename
             // Call plugin manager to create a rule
             // Currently just work with add prefix rule
             Request item = new Request();
-            item.m_mid = BrMethods.BR_MID_ADD_PREFIX_ADD_RULE_CLICK;
+            item.m_mid = BrMethods.BR_MID_REPLACE_CHARACTERS_ADD_RULE_CLICK;
             var rule = (PluginManager.getInstance().Handle(item)) as IRule;
 
             if (rule != null)
@@ -596,7 +596,7 @@ namespace BatchRename
             foreach (IRule rule in _chosenRule)
             {
                 Request in_resource = new Request();
-                in_resource.m_mid = BrMethods.BR_MID_ADD_PREFIX_RENAME;
+                in_resource.m_mid = BrMethods.BR_MID_REPLACE_CHARACTERS_RENAME;
                 in_resource.m_params = new Dictionary<string, object>();
                 in_resource.m_params.Add("list", list);
                 in_resource.m_params.Add("is_file", isFile);

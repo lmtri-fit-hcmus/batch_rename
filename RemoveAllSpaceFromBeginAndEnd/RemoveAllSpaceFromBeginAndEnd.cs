@@ -15,7 +15,38 @@ using System.Linq;
 
 namespace BatchRename
 {
-    public class RemoveAllSpaceFromBeginAndEnd : IRule
+    public class RemoveAllSpaceFromBeginAndEnd : IPlugin
+    {
+        public object Handle(Request item)
+        {
+            switch (item.m_mid)
+            {
+                case BrMethods.BR_MID_REMOVE_ALL_SPACE_FROM_BEGIN_AND_END_RENAME:
+                    bool isFile = Convert.ToBoolean(item.m_params["is_file"]);
+                    ObservableCollection<Item> list = item.m_params["list"] as ObservableCollection<Item>;
+                    List<string> paramRule = item.m_params["params"] as List<string>;
+                    _RemoveAllSpaceFromBeginAndEnd renameRule = new _RemoveAllSpaceFromBeginAndEnd();
+                    renameRule.Parameter = paramRule;
+                    renameRule.Rename(list, isFile);
+                    break;
+
+                case BrMethods.BR_MID_REMOVE_ALL_SPACE_FROM_BEGIN_AND_END_ADD_RULE_CLICK:
+                    var cloneRule = new _RemoveAllSpaceFromBeginAndEnd();
+                    if (cloneRule.isEditable())
+                    {
+                        if (cloneRule.showUI() == false)
+                            return null;
+                        return cloneRule;
+                    }
+                    else if (cloneRule != null)
+                        return cloneRule;
+                    return null;
+            }
+            return true;
+        }
+    }
+
+    public class _RemoveAllSpaceFromBeginAndEnd : IRule
     {
         public string ruleName { get; set; }
         public string ruleDescription { get; set; }
@@ -23,7 +54,7 @@ namespace BatchRename
         public string Replace { get; set; }
         public List<int> counter { get; set; }
 
-        public RemoveAllSpaceFromBeginAndEnd(string _rulename, string _ruleDescription, List<string> _parameter,
+        public _RemoveAllSpaceFromBeginAndEnd(string _rulename, string _ruleDescription, List<string> _parameter,
 string _replace, List<int> _counter)
         {
             ruleName = _rulename;
@@ -33,7 +64,7 @@ string _replace, List<int> _counter)
             counter = _counter;
         }
 
-        public RemoveAllSpaceFromBeginAndEnd()
+        public _RemoveAllSpaceFromBeginAndEnd()
         {
             Parameter = new List<string>();
             Parameter.Add("");
@@ -56,7 +87,7 @@ string _replace, List<int> _counter)
 
         public IRule Clone()
         {
-            RemoveAllSpaceFromBeginAndEnd clone = new RemoveAllSpaceFromBeginAndEnd();
+            _RemoveAllSpaceFromBeginAndEnd clone = new _RemoveAllSpaceFromBeginAndEnd();
             clone.Parameter = Parameter;
             return clone;
         }
