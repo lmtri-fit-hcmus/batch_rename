@@ -75,7 +75,7 @@ namespace BatchRename
          * Method range: 501-550
          */
         #region ADD_SUFFIX_COUNTER_RULE
-        public const string BR_ADD_SUFFIX_COUNTER_NAME = "Add Suffix Counter Rule";
+        public const string BR_ADD_SUFFIX_COUNTER_NAME = "AddSuffixCounterRule";
         public const int BR_MID_START_ADD_SUFFIX_COUNTER = 501;
         public const int BR_MID_ADD_SUFFIX_COUNTER_RULE = BR_MID_START_ADD_SUFFIX_COUNTER;
         public const int BR_MID_ADD_SUFFIX_COUNTER_RENAME = BR_MID_START_ADD_SUFFIX_COUNTER + 1;
@@ -88,7 +88,7 @@ namespace BatchRename
          * Method range: 551-600
          */
         #region ADD_SUFFIX_RULE
-        public const string BR_ADD_SUFFIX_NAME = "Add Suffix Rule";
+        public const string BR_ADD_SUFFIX_NAME = "AddSuffixRule";
         public const int BR_MID_START_ADD_SUFFIX = 551;
         public const int BR_MID_ADD_SUFFIX_RULE = BR_MID_START_ADD_SUFFIX;
         public const int BR_MID_ADD_SUFFIX_RENAME = BR_MID_START_ADD_SUFFIX + 1;
@@ -101,7 +101,7 @@ namespace BatchRename
          * Method range: 601-650
          */
         #region CHANGE_EXTENSION_RULE
-        public const string BR_CHANGE_EXTENSION_NAME = "Change Extension Rule";
+        public const string BR_CHANGE_EXTENSION_NAME = "ChangeExtensionRule";
         public const int BR_MID_START_CHANGE_EXTENSION = 601;
         public const int BR_MID_CHANGE_EXTENSION_RULE = BR_MID_START_CHANGE_EXTENSION;
         public const int BR_MID_CHANGE_EXTENSION_RENAME = BR_MID_START_CHANGE_EXTENSION + 1;
@@ -115,7 +115,7 @@ namespace BatchRename
          * Method range: 651-700
          */
         #region LOWERCASE_AND_REMOVE_SPACE_RULE
-        public const string BR_LOWERCASE_AND_REMOVE_SPACE_NAME = "Lowercase And Remove Space";
+        public const string BR_LOWERCASE_AND_REMOVE_SPACE_NAME = "LowercaseAndRemoveSpace";
         public const int BR_MID_START_LOWERCASE_AND_REMOVE_SPACE = 651;
         public const int BR_MID_LOWERCASE_AND_REMOVE_SPACE_RULE = BR_MID_START_LOWERCASE_AND_REMOVE_SPACE;
         public const int BR_MID_LOWERCASE_AND_REMOVE_SPACE_RENAME = BR_MID_START_LOWERCASE_AND_REMOVE_SPACE + 1;
