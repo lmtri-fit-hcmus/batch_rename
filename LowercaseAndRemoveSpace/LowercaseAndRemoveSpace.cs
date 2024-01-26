@@ -39,6 +39,13 @@ namespace BatchRename
                     else if (cloneRule != null)
                         return RuleFormatAdapter.changeToRuleFormat(cloneRule);
                     return null;
+                /*
+                * params: []
+                * return: bool
+                */
+                case BrMethods.BR_MID_LOWERCASE_AND_REMOVE_SPACE_IS_EDITABLE:
+                    var _ = new _LowercaseAndRemoveSpace();
+                    return _.isEditable();
             }
             return true;
         }

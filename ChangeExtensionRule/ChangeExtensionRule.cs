@@ -42,6 +42,13 @@ namespace BatchRename
                     else if (cloneRule != null)
                         return RuleFormatAdapter.changeToRuleFormat(cloneRule);
                     return null;
+                /*
+                * params: []
+                * return: bool
+                */
+                case BrMethods.BR_MID_CHANGE_EXTENSION_IS_EDITABLE:
+                    var _ = new _ChangeExtensionRule();
+                    return _.isEditable();
             }
             return true;
         }

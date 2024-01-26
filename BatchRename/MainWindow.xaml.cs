@@ -55,29 +55,6 @@ namespace BatchRename
 
         private void RibbonWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            // _listFile = e.Data.GetData(DataFormats.FileDrop, true);
-
-            //var exeFolder = AppDomain.CurrentDomain.BaseDirectory;
-            //var dlls = new DirectoryInfo(exeFolder).GetFiles("dllRules/*.dll");
-            //foreach (var dll in dlls)
-            //{
-            //    var assembly = Assembly.LoadFile(dll.FullName);
-            //    var types = assembly.GetTypes();
-
-            //    foreach (var type in types)
-            //    {
-            //        if (type.IsClass)
-            //        {
-            //            if (typeof(IRule).IsAssignableFrom(type))
-            //            {
-            //                var temp_rule = Activator.CreateInstance(type) as IRule;
-            //                _listRule.Add(temp_rule);
-            //            }
-            //        }
-            //    }
-            //}
-            // 
-
             Request item = new Request();
             item.m_mid = BrMethods.BR_MID_GET_PLUGINS_INFO;
             _listRule = (PluginManager.getInstance().Handle(item)) as ObservableCollection<RuleFormat>;
@@ -112,7 +89,7 @@ namespace BatchRename
 
         private void listRules_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            
         }
         private void MainWindow_Closing(object sender, CancelEventArgs e)
         {
@@ -439,25 +416,28 @@ namespace BatchRename
             int index = rulesListBox.SelectedIndex;
             var rule = _chosenRule[index];
             txt_description.Text = rule.ruleDescription;
-            //if (rule.isEditable())
-            //{
-            //    buttonEdit.Visibility = Visibility.Visible;
-            //}
 
-        }
+            Request r = new Request();
+            r.m_mid = PluginIsEditableMethodFactory.createMid(rule.ruleName);
+            object isEditable = (PluginManager.getInstance().Handle(r));
+            if(isEditable is bool && (bool)isEditable) { 
+                buttonEdit.Visibility = Visibility.Visible;
+            }
+    }
 
         private void buttonEditClick(object sender, RoutedEventArgs e)
         {
             if (rulesListBox.SelectedItem == null)
                 return;
-            //int index = rulesListBox.SelectedIndex;
-            //var rule = _chosenRule[index].Clone();
-            //if (rule.showUI() == true)
-            //{
-            //    _chosenRule[index] = rule;
-            //    txt_description.Text = rule.ruleDescription;
-            //}
+            int index = rulesListBox.SelectedIndex;
+            Request item = new Request();
+            item.m_mid = PluginCloneMethodFactory.createMid(_chosenRule[index].ruleName);
+            var rule = (PluginManager.getInstance().Handle(item)) as RuleFormat;
 
+            if (rule != null) {
+                _chosenRule[index] = rule;
+                txt_description.Text = rule.ruleDescription;
+            }
         }
 
         private void removeRule(object sender, RoutedEventArgs e)

@@ -47,8 +47,15 @@ namespace BatchRename
                     else if (cloneRule != null)
                         return RuleFormatAdapter.changeToRuleFormat(cloneRule);
                     return null;
-            }
-            return true;
+                /*
+                * params: []
+                * return: bool
+                */
+                case BrMethods.BR_MID_ADD_SUFFIX_COUNTER_IS_EDITABLE:
+                        var _ = new _AddSuffixCounterRule();
+                        return _.isEditable();
+                }
+                return true;
         }
 
         private class _AddSuffixCounterRule : Window, IRule
