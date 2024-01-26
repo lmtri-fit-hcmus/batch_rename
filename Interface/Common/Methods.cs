@@ -40,7 +40,7 @@ namespace BatchRename
          * Plugin: Pascal Case
          * Method range: 351-400
          */
-        public const string BR_PASCAL_CASE_NAME                 = "Pascal Case";
+        public const string BR_PASCAL_CASE_NAME                 = "PascalCase";
         public const int BR_MID_START_PASCAL_CASE               = 351;
         public const int BR_MID_PASCAL_CASE                     = BR_MID_START_PASCAL_CASE;
         public const int BR_MID_PASCAL_CASE_RENAME              = BR_MID_START_PASCAL_CASE + 1;
@@ -51,7 +51,7 @@ namespace BatchRename
          * Plugin: Remove All Space From Begin And End
          * Method range: 401-450
          */
-        public const string BR_REMOVE_ALL_SPACE_FROM_BEGIN_AND_END_NAME             = "Remove All Space From Begin And End";
+        public const string BR_REMOVE_ALL_SPACE_FROM_BEGIN_AND_END_NAME             = "RemoveAllSpaceFromBeginAndEnd";
         public const int BR_MID_START_REMOVE_ALL_SPACE_FROM_BEGIN_AND_END           = 401;
         public const int BR_MID_REMOVE_ALL_SPACE_FROM_BEGIN_AND_END                 = BR_MID_START_REMOVE_ALL_SPACE_FROM_BEGIN_AND_END;
         public const int BR_MID_REMOVE_ALL_SPACE_FROM_BEGIN_AND_END_RENAME          = BR_MID_START_REMOVE_ALL_SPACE_FROM_BEGIN_AND_END + 1;
@@ -62,7 +62,7 @@ namespace BatchRename
          * Plugin: Replace Characters
          * Method range: 451-500
          */
-        public const string BR_REPLACE_CHARACTERS_NAME                              = "Replace Characters";
+        public const string BR_REPLACE_CHARACTERS_NAME                              = "ReplaceCharacters";
         public const int BR_MID_START_REPLACE_CHARACTERS                            = 451;
         public const int BR_MID_REPLACE_CHARACTERS                                  = BR_MID_START_REPLACE_CHARACTERS;
         public const int BR_MID_REPLACE_CHARACTERS_RENAME                           = BR_MID_START_REPLACE_CHARACTERS + 1;

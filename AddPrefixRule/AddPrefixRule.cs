@@ -80,7 +80,7 @@ namespace BatchRename
             {
                 Parameter = new List<string>();
                 Parameter.Add("");
-                ruleName = "Add Prefix Rule";
+                ruleName = BrMethods.BR_ADD_PREFIX_NAME;
                 ruleDescription = "Add " + Parameter[0] + " into prefix filename.";
                 counter = new List<int>();
                 counter.Add(0);

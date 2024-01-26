@@ -23,7 +23,6 @@ namespace Interface.Common
 
         public static int createMid(string ruleName)
         {
-            ruleName = ruleName.Replace(" ", "");
             if (br_mids.ContainsKey(ruleName))
             { 
                 return br_mids[ruleName];
