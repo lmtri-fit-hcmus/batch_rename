@@ -2,13 +2,9 @@ using System;
 using System.Windows.Controls;
 using System.Windows;
 using Interface;
-using System.Runtime.CompilerServices;
-using System.Windows.Documents;
-using System.Windows.Media.Imaging;
 using System.Collections.Generic;
 using System.Text;
 using System.Collections.ObjectModel;
-using System.Reflection.Metadata;
 
 namespace BatchRename
 {

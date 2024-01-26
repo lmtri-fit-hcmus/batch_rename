@@ -38,6 +38,35 @@ namespace BatchRename
                     { BrConstants.BR_KEY_NAME,    BrMethods.BR_REPLACE_CHARACTERS_NAME }
                 },
                 // Add more entries for
+
+                // entry for add suffix counter plugin
+                new  Dictionary<string, object>
+                {
+                    { BrConstants.BR_KEY_FIRST_MID, BrMethods.BR_MID_START_ADD_SUFFIX_COUNTER },
+                    { BrConstants.BR_KEY_LAST_MID,  BrMethods.BR_MID_END_ADD_SUFFIX_COUNTER },
+                    { BrConstants.BR_KEY_NAME,    BrMethods.BR_ADD_SUFFIX_COUNTER_NAME }
+                },
+                // entry for add suffix plugin
+                new  Dictionary<string, object>
+                {
+                    { BrConstants.BR_KEY_FIRST_MID, BrMethods.BR_MID_START_ADD_SUFFIX },
+                    { BrConstants.BR_KEY_LAST_MID,  BrMethods.BR_MID_END_ADD_SUFFIX },
+                    { BrConstants.BR_KEY_NAME,    BrMethods.BR_ADD_SUFFIX_NAME }
+                },
+                // entry for change extension plugin
+                new  Dictionary<string, object>
+                {
+                    { BrConstants.BR_KEY_FIRST_MID, BrMethods.BR_MID_START_CHANGE_EXTENSION },
+                    { BrConstants.BR_KEY_LAST_MID,  BrMethods.BR_MID_END_CHANGE_EXTENSION },
+                    { BrConstants.BR_KEY_NAME,    BrMethods.BR_CHANGE_EXTENSION_NAME }
+                },
+                // entry for lowercase and remove space plugin
+                new  Dictionary<string, object>
+                {
+                    { BrConstants.BR_KEY_FIRST_MID, BrMethods.BR_MID_START_LOWERCASE_AND_REMOVE_SPACE },
+                    { BrConstants.BR_KEY_LAST_MID,  BrMethods.BR_MID_END_LOWERCASE_AND_REMOVE_SPACE },
+                    { BrConstants.BR_KEY_NAME,    BrMethods.BR_LOWERCASE_AND_REMOVE_SPACE_NAME }
+                },
             };
         }
     }
