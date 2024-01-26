@@ -72,55 +72,55 @@ namespace BatchRename
 
         /*
          * Plugin: Add Suffix Counter
-         * Method range: 151-200
+         * Method range: 501-550
          */
         #region ADD_SUFFIX_COUNTER_RULE
-        public const string BR_ADD_SUFFIX_COUNTER_NAME = "AddSuffixCounterRule";
-        public const int BR_MID_START_ADD_SUFFIX_COUNTER = 151;
+        public const string BR_ADD_SUFFIX_COUNTER_NAME = "Add Suffix Counter Rule";
+        public const int BR_MID_START_ADD_SUFFIX_COUNTER = 501;
         public const int BR_MID_ADD_SUFFIX_COUNTER_RULE = BR_MID_START_ADD_SUFFIX_COUNTER;
         public const int BR_MID_ADD_SUFFIX_COUNTER_RENAME = BR_MID_START_ADD_SUFFIX_COUNTER + 1;
         public const int BR_MID_ADD_SUFFIX_COUNTER_ADD_RULE_CLICK = BR_MID_START_ADD_SUFFIX_COUNTER + 2;
-        public const int BR_MID_END_ADD_SUFFIX_COUNTER = 200;
+        public const int BR_MID_END_ADD_SUFFIX_COUNTER = 550;
         #endregion
 
         /*
          * Plugin: Add Suffix 
-         * Method range: 201-250
+         * Method range: 551-600
          */
         #region ADD_SUFFIX_RULE
-        public const string BR_ADD_SUFFIX_NAME = "AddSuffixRule";
-        public const int BR_MID_START_ADD_SUFFIX = 201;
+        public const string BR_ADD_SUFFIX_NAME = "Add Suffix Rule";
+        public const int BR_MID_START_ADD_SUFFIX = 551;
         public const int BR_MID_ADD_SUFFIX_RULE = BR_MID_START_ADD_SUFFIX;
         public const int BR_MID_ADD_SUFFIX_RENAME = BR_MID_START_ADD_SUFFIX + 1;
         public const int BR_MID_ADD_SUFFIX_ADD_RULE_CLICK = BR_MID_START_ADD_SUFFIX + 2;
-        public const int BR_MID_END_ADD_SUFFIX = 250;
+        public const int BR_MID_END_ADD_SUFFIX = 600;
         #endregion
 
         /*
          * Plugin: Change Extension
-         * Method range: 251-300
+         * Method range: 601-650
          */
         #region CHANGE_EXTENSION_RULE
-        public const string BR_CHANGE_EXTENSION_NAME = "ChangeExtensionRule";
-        public const int BR_MID_START_CHANGE_EXTENSION = 251;
+        public const string BR_CHANGE_EXTENSION_NAME = "Change Extension Rule";
+        public const int BR_MID_START_CHANGE_EXTENSION = 601;
         public const int BR_MID_CHANGE_EXTENSION_RULE = BR_MID_START_CHANGE_EXTENSION;
         public const int BR_MID_CHANGE_EXTENSION_RENAME = BR_MID_START_CHANGE_EXTENSION + 1;
         public const int BR_MID_CHANGE_EXTENSION_ADD_RULE_CLICK = BR_MID_START_CHANGE_EXTENSION + 2;
-        public const int BR_MID_END_CHANGE_EXTENSION = 300;
+        public const int BR_MID_END_CHANGE_EXTENSION = 650;
         #endregion
 
 
         /*
          * Plugin: Lowercase and remove space
-         * Method range: 301-350
+         * Method range: 651-700
          */
         #region LOWERCASE_AND_REMOVE_SPACE_RULE
-        public const string BR_LOWERCASE_AND_REMOVE_SPACE_NAME = "LowercaseAndRemoveSpace";
-        public const int BR_MID_START_LOWERCASE_AND_REMOVE_SPACE = 301;
+        public const string BR_LOWERCASE_AND_REMOVE_SPACE_NAME = "Lowercase And Remove Space";
+        public const int BR_MID_START_LOWERCASE_AND_REMOVE_SPACE = 651;
         public const int BR_MID_LOWERCASE_AND_REMOVE_SPACE_RULE = BR_MID_START_LOWERCASE_AND_REMOVE_SPACE;
         public const int BR_MID_LOWERCASE_AND_REMOVE_SPACE_RENAME = BR_MID_START_LOWERCASE_AND_REMOVE_SPACE + 1;
         public const int BR_MID_LOWERCASE_AND_REMOVE_SPACE_ADD_RULE_CLICK = BR_MID_START_LOWERCASE_AND_REMOVE_SPACE + 2;
-        public const int BR_MID_END_LOWERCASE_AND_REMOVE_SPACE = 350;
+        public const int BR_MID_END_LOWERCASE_AND_REMOVE_SPACE = 700;
         #endregion
     }
 }
