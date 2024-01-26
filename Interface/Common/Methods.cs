@@ -27,6 +27,7 @@ namespace BatchRename
         public const int BR_MID_ADD_PREFIX_RULE                 = BR_MID_START_ADD_PREFIX;
         public const int BR_MID_ADD_PREFIX_RENAME               = BR_MID_START_ADD_PREFIX + 1;
         public const int BR_MID_ADD_PREFIX_ADD_RULE_CLICK       = BR_MID_START_ADD_PREFIX + 2;
+        public const int BR_MID_ADD_PREFIX_IS_EDITABLE          = BR_MID_START_ADD_PREFIX + 3;
         public const int BR_MID_END_ADD_PREFIX                  = 150;
 
 
@@ -45,6 +46,7 @@ namespace BatchRename
         public const int BR_MID_PASCAL_CASE                     = BR_MID_START_PASCAL_CASE;
         public const int BR_MID_PASCAL_CASE_RENAME              = BR_MID_START_PASCAL_CASE + 1;
         public const int BR_MID_PASCAL_CASE_ADD_RULE_CLICK      = BR_MID_START_PASCAL_CASE + 2;
+        public const int BR_MID_PASCAL_CASE_IS_EDITABLE         = BR_MID_START_PASCAL_CASE + 3;
         public const int BR_MID_END_PASCAL_CASE                 = 400;
 
         /*
@@ -56,6 +58,7 @@ namespace BatchRename
         public const int BR_MID_REMOVE_ALL_SPACE_FROM_BEGIN_AND_END                 = BR_MID_START_REMOVE_ALL_SPACE_FROM_BEGIN_AND_END;
         public const int BR_MID_REMOVE_ALL_SPACE_FROM_BEGIN_AND_END_RENAME          = BR_MID_START_REMOVE_ALL_SPACE_FROM_BEGIN_AND_END + 1;
         public const int BR_MID_REMOVE_ALL_SPACE_FROM_BEGIN_AND_END_ADD_RULE_CLICK  = BR_MID_START_REMOVE_ALL_SPACE_FROM_BEGIN_AND_END + 2;
+        public const int BR_MID_REMOVE_ALL_SPACE_FROM_BEGIN_AND_END_IS_EDITABLE     = BR_MID_START_REMOVE_ALL_SPACE_FROM_BEGIN_AND_END + 3;
         public const int BR_MID_END_REMOVE_ALL_SPACE_FROM_BEGIN_AND_END             = 450;
 
         /*
@@ -67,6 +70,7 @@ namespace BatchRename
         public const int BR_MID_REPLACE_CHARACTERS                                  = BR_MID_START_REPLACE_CHARACTERS;
         public const int BR_MID_REPLACE_CHARACTERS_RENAME                           = BR_MID_START_REPLACE_CHARACTERS + 1;
         public const int BR_MID_REPLACE_CHARACTERS_ADD_RULE_CLICK                   = BR_MID_START_REPLACE_CHARACTERS + 2;
+        public const int BR_MID_REPLACE_CHARACTERS_IS_EDITABLE                      = BR_MID_START_REPLACE_CHARACTERS + 3;
         public const int BR_MID_END_REPLACE_CHARACTERS                              = 500;
         // Implement here
 
@@ -80,6 +84,7 @@ namespace BatchRename
         public const int BR_MID_ADD_SUFFIX_COUNTER_RULE = BR_MID_START_ADD_SUFFIX_COUNTER;
         public const int BR_MID_ADD_SUFFIX_COUNTER_RENAME = BR_MID_START_ADD_SUFFIX_COUNTER + 1;
         public const int BR_MID_ADD_SUFFIX_COUNTER_ADD_RULE_CLICK = BR_MID_START_ADD_SUFFIX_COUNTER + 2;
+        public const int BR_MID_ADD_SUFFIX_COUNTER_IS_EDITABLE = BR_MID_START_ADD_SUFFIX_COUNTER + 3;
         public const int BR_MID_END_ADD_SUFFIX_COUNTER = 550;
         #endregion
 
@@ -93,6 +98,7 @@ namespace BatchRename
         public const int BR_MID_ADD_SUFFIX_RULE = BR_MID_START_ADD_SUFFIX;
         public const int BR_MID_ADD_SUFFIX_RENAME = BR_MID_START_ADD_SUFFIX + 1;
         public const int BR_MID_ADD_SUFFIX_ADD_RULE_CLICK = BR_MID_START_ADD_SUFFIX + 2;
+        public const int BR_MID_ADD_SUFFIX_IS_EDITABLE = BR_MID_START_ADD_SUFFIX + 3;
         public const int BR_MID_END_ADD_SUFFIX = 600;
         #endregion
 
@@ -106,6 +112,7 @@ namespace BatchRename
         public const int BR_MID_CHANGE_EXTENSION_RULE = BR_MID_START_CHANGE_EXTENSION;
         public const int BR_MID_CHANGE_EXTENSION_RENAME = BR_MID_START_CHANGE_EXTENSION + 1;
         public const int BR_MID_CHANGE_EXTENSION_ADD_RULE_CLICK = BR_MID_START_CHANGE_EXTENSION + 2;
+        public const int BR_MID_CHANGE_EXTENSION_IS_EDITABLE = BR_MID_START_CHANGE_EXTENSION + 3;
         public const int BR_MID_END_CHANGE_EXTENSION = 650;
         #endregion
 
@@ -120,6 +127,7 @@ namespace BatchRename
         public const int BR_MID_LOWERCASE_AND_REMOVE_SPACE_RULE = BR_MID_START_LOWERCASE_AND_REMOVE_SPACE;
         public const int BR_MID_LOWERCASE_AND_REMOVE_SPACE_RENAME = BR_MID_START_LOWERCASE_AND_REMOVE_SPACE + 1;
         public const int BR_MID_LOWERCASE_AND_REMOVE_SPACE_ADD_RULE_CLICK = BR_MID_START_LOWERCASE_AND_REMOVE_SPACE + 2;
+        public const int BR_MID_LOWERCASE_AND_REMOVE_SPACE_IS_EDITABLE = BR_MID_START_LOWERCASE_AND_REMOVE_SPACE + 3;
         public const int BR_MID_END_LOWERCASE_AND_REMOVE_SPACE = 700;
         #endregion
     }

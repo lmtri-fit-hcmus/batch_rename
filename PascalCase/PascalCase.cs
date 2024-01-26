@@ -32,6 +32,13 @@ namespace BatchRename
                     else if (cloneRule != null)
                         return RuleFormatAdapter.changeToRuleFormat(cloneRule); ;
                     return null;
+                /*
+                * params: []
+                * return: bool
+                */
+                case BrMethods.BR_MID_PASCAL_CASE_IS_EDITABLE:
+                    var _ = new _PascalCase();
+                    return _.isEditable();
             }
             return true;
         }

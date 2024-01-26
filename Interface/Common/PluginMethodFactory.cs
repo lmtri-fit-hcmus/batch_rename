@@ -58,4 +58,30 @@ namespace Interface.Common
         }
 
     }
+
+    public static class PluginIsEditableMethodFactory
+    {
+        private static Dictionary<string, int> br_mids = new Dictionary<string, int>
+        {
+            { BrMethods.BR_ADD_PREFIX_NAME, BrMethods.BR_MID_ADD_PREFIX_IS_EDITABLE  },
+            { BrMethods.BR_PASCAL_CASE_NAME, BrMethods.BR_MID_PASCAL_CASE_IS_EDITABLE  },
+            { BrMethods.BR_REMOVE_ALL_SPACE_FROM_BEGIN_AND_END_NAME, BrMethods.BR_MID_REMOVE_ALL_SPACE_FROM_BEGIN_AND_END_IS_EDITABLE  },
+            { BrMethods.BR_REPLACE_CHARACTERS_NAME, BrMethods.BR_MID_REPLACE_CHARACTERS_IS_EDITABLE  },
+            { BrMethods.BR_ADD_SUFFIX_COUNTER_NAME, BrMethods.BR_MID_ADD_SUFFIX_COUNTER_IS_EDITABLE  },
+            { BrMethods.BR_ADD_SUFFIX_NAME, BrMethods.BR_MID_ADD_SUFFIX_IS_EDITABLE  },
+            { BrMethods.BR_CHANGE_EXTENSION_NAME, BrMethods.BR_MID_CHANGE_EXTENSION_IS_EDITABLE  },
+            { BrMethods.BR_LOWERCASE_AND_REMOVE_SPACE_NAME, BrMethods.BR_MID_LOWERCASE_AND_REMOVE_SPACE_IS_EDITABLE}
+        };
+
+        public static int createMid(string ruleName)
+        {
+            if (br_mids.ContainsKey(ruleName))
+            {
+                return br_mids[ruleName];
+            }
+
+            return -1;
+        }
+
+    }
 }

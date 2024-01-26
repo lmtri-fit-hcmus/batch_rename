@@ -47,6 +47,11 @@ namespace Interface
         public List<string> Parameter { get; set; }
         public string Replace { get; set; }
         public List<int> counter { get; set; }
+
+        public override string ToString()
+        {
+            return ruleName;
+        }
     }
     public class ProJect
     {
