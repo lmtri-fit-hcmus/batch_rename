@@ -37,10 +37,10 @@ namespace BatchRename
                     {
                         if (cloneRule.showUI() == false)
                             return null;
-                        return cloneRule;
+                        return RuleFormatAdapter.changeToRuleFormat(cloneRule);
                     }
                     else if (cloneRule != null)
-                        return cloneRule;
+                        return RuleFormatAdapter.changeToRuleFormat(cloneRule);
                     return null;
             }
             return true;
@@ -75,7 +75,7 @@ namespace BatchRename
             {
                 Parameter = new List<string>();
                 Parameter.Add("");
-                ruleName = "Change Extension Rule";
+                ruleName = BrMethods.BR_CHANGE_EXTENSION_NAME;
                 ruleDescription = $"Change all extension to: .{Parameter[0]}";
                 counter = new List<int>();
                 counter.Add(0);

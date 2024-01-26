@@ -34,10 +34,10 @@ namespace BatchRename
                     {
                         if (cloneRule.showUI() == false)
                             return null;
-                        return cloneRule;
+                        return RuleFormatAdapter.changeToRuleFormat(cloneRule);
                     }
                     else if (cloneRule != null)
-                        return cloneRule;
+                        return RuleFormatAdapter.changeToRuleFormat(cloneRule);
                     return null;
             }
             return true;
@@ -66,7 +66,7 @@ namespace BatchRename
             }
             public _LowercaseAndRemoveSpace()
             {
-                ruleName = "Lower case and remove space";
+                ruleName = BrMethods.BR_LOWERCASE_AND_REMOVE_SPACE_NAME;
                 ruleDescription = "change file name to lower and remove all spaces";
             }
 

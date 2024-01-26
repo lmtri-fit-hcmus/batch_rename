@@ -115,7 +115,7 @@ namespace BatchRename
          * Method range: 301-350
          */
         #region LOWERCASE_AND_REMOVE_SPACE_RULE
-        public const string BR_LOWERCASE_AND_REMOVE_SPACE_NAME = "LowercaseAndRemoveSpaceRule";
+        public const string BR_LOWERCASE_AND_REMOVE_SPACE_NAME = "LowercaseAndRemoveSpace";
         public const int BR_MID_START_LOWERCASE_AND_REMOVE_SPACE = 301;
         public const int BR_MID_LOWERCASE_AND_REMOVE_SPACE_RULE = BR_MID_START_LOWERCASE_AND_REMOVE_SPACE;
         public const int BR_MID_LOWERCASE_AND_REMOVE_SPACE_RENAME = BR_MID_START_LOWERCASE_AND_REMOVE_SPACE + 1;

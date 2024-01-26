@@ -42,10 +42,10 @@ namespace BatchRename
                     {
                         if (cloneRule.showUI() == false)
                             return null;
-                        return cloneRule;
+                        return RuleFormatAdapter.changeToRuleFormat(cloneRule);
                     }
                     else if (cloneRule != null)
-                        return cloneRule;
+                        return RuleFormatAdapter.changeToRuleFormat(cloneRule);
                     return null;
             }
             return true;
@@ -88,7 +88,7 @@ namespace BatchRename
                 Parameter.Add("0");
                 Parameter.Add("1");
                 Parameter.Add("1");
-                ruleName = "Add counter to the end";
+                ruleName = BrMethods.BR_ADD_SUFFIX_COUNTER_NAME;
                 ruleDescription = $"Add counter to the end.\n" +
                                     $"Start: {Parameter[0]}\n" +
                                     $"Steps: {Parameter[1]}\n" +
