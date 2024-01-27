@@ -6,6 +6,8 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <Platforms>AnyCPU;x86</Platforms>
+    <BaseOutputPath>$(SolutionDir)bin</BaseOutputPath>
+	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -35,33 +37,6 @@
     <None Remove="Images\up.png" />
     <None Remove="Images\up2.png" />
     <None Remove="Images\writer.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="dllRules\AddPrefixRule.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="dllRules\AddSuffixCounterRule.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="dllRules\AddSuffixRule.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="dllRules\LowercaseAndRemoveSpace.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="dllRules\PascalCase.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="dllRules\ReplaceCharacters.dll">
-		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	</Content>
-    <Content Include="dllRules\ChangeExtensionRule.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="dllRules\RemoveAllSpaceFromBeginAndEnd.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>

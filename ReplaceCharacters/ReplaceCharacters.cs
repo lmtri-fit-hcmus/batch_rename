@@ -8,7 +8,44 @@ using System.Windows.Controls;
 
 namespace BatchRename
 {
-    public class ReplaceCharacters : Window, IRule
+    public class ReplaceCharacters : IPlugin
+    {
+        public object Handle(Request item)
+        {
+            switch (item.m_mid)
+            {
+                case BrMethods.BR_MID_REPLACE_CHARACTERS_RENAME:
+                    bool isFile = Convert.ToBoolean(item.m_params["is_file"]);
+                    ObservableCollection<Item> list = item.m_params["list"] as ObservableCollection<Item>;
+                    List<string> paramRule = item.m_params["params"] as List<string>;
+                    _ReplaceCharacters renameRule = new _ReplaceCharacters();
+                    renameRule.Parameter = paramRule;
+                    renameRule.Rename(list, isFile);
+                    break;
+
+                case BrMethods.BR_MID_REPLACE_CHARACTERS_ADD_RULE_CLICK:
+                    var cloneRule = new _ReplaceCharacters();
+                    if (cloneRule.isEditable())
+                    {
+                        if (cloneRule.showUI() == false)
+                            return null;
+                        return RuleFormatAdapter.changeToRuleFormat(cloneRule); ;
+                    }
+                    else if (cloneRule != null)
+                        return RuleFormatAdapter.changeToRuleFormat(cloneRule); ;
+                    return null;
+                /*
+                * params: []
+                * return: bool
+                */
+                case BrMethods.BR_MID_REPLACE_CHARACTERS_IS_EDITABLE:
+                    var _ = new _ReplaceCharacters();
+                    return _.isEditable();
+            }
+            return true;
+        }
+    }
+    public class _ReplaceCharacters : Window, IRule
     {
         private Canvas canvas = new Canvas();
         private Label label1 = new Label();
@@ -28,7 +65,7 @@ namespace BatchRename
             return true;
         }
 
-        public ReplaceCharacters(string _rulename, string _ruleDescription, List<string> _parameter,
+        public _ReplaceCharacters(string _rulename, string _ruleDescription, List<string> _parameter,
    string _replace, List<int> _counter)
         {
             ruleName = _rulename;
@@ -38,12 +75,12 @@ namespace BatchRename
             counter = _counter;
         }
 
-        public ReplaceCharacters()
+        public _ReplaceCharacters()
         {
             Parameter = new List<string>();
             Parameter.Add("");
             Parameter.Add("");
-            ruleName = "Replace characters";
+            ruleName = BrMethods.BR_REPLACE_CHARACTERS_NAME;
             ruleDescription = "Replace " + Parameter[0] + " characters into " + Parameter[1];
             counter = new List<int>();
             counter.Add(0);
@@ -106,7 +143,7 @@ namespace BatchRename
 
         public IRule Clone()
         {
-            ReplaceCharacters clone = new ReplaceCharacters();
+            _ReplaceCharacters clone = new _ReplaceCharacters();
             clone.Parameter = Parameter;
             return clone;
         }

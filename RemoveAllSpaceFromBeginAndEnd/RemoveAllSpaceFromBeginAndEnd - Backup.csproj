@@ -4,10 +4,9 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <Platforms>AnyCPU;x86</Platforms>
-	<BaseOutputPath>$(SolutionDir)bin</BaseOutputPath>
+	<Platforms>AnyCPU;x86</Platforms>
+    <BaseOutputPath>$(SolutionDir)bin</BaseOutputPath>
 	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>

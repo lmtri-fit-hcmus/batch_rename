@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.Eventing.Reader;
+using System.Diagnostics.Metrics;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,6 +25,21 @@ namespace Interface
 
         public IRule Clone(); // copy rule
     }
+
+    public class RuleFormatAdapter
+    {
+        public static RuleFormat changeToRuleFormat(IRule r)
+        {
+            var rule = new RuleFormat();
+
+            rule.ruleName = r.ruleName;
+            rule.ruleDescription = r.ruleDescription;
+            rule.Parameter = r.Parameter;
+            rule.Replace = r.Replace;
+            rule.counter = r.counter;
+            return rule;
+        }
+    }
     public class RuleFormat
     {
         public string ruleName { get; set; }
@@ -30,6 +47,11 @@ namespace Interface
         public List<string> Parameter { get; set; }
         public string Replace { get; set; }
         public List<int> counter { get; set; }
+
+        public override string ToString()
+        {
+            return ruleName;
+        }
     }
     public class ProJect
     {

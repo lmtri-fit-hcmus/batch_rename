@@ -2,13 +2,9 @@ using System;
 using System.Windows.Controls;
 using System.Windows;
 using Interface;
-using System.Runtime.CompilerServices;
-using System.Windows.Documents;
-using System.Windows.Media.Imaging;
 using System.Collections.Generic;
 using System.Text;
 using System.Collections.ObjectModel;
-using System.Reflection.Metadata;
 
 namespace BatchRename
 {
@@ -42,11 +38,18 @@ namespace BatchRename
                     {
                         if (cloneRule.showUI() == false)
                             return null;
-                        return cloneRule;
+                        return RuleFormatAdapter.changeToRuleFormat(cloneRule);
                     }
                     else if(cloneRule != null)
-                        return cloneRule;
+                        return RuleFormatAdapter.changeToRuleFormat(cloneRule);
                     return null;
+                /*
+                * params: []
+                * return: bool
+                */
+                case BrMethods.BR_MID_ADD_PREFIX_IS_EDITABLE:
+                    var _ = new _AddPrefixRule();
+                    return _.isEditable();
             }
             return true;
         }
@@ -83,7 +86,7 @@ namespace BatchRename
             {
                 Parameter = new List<string>();
                 Parameter.Add("");
-                ruleName = "Add Prefix Rule";
+                ruleName = BrMethods.BR_ADD_PREFIX_NAME;
                 ruleDescription = "Add " + Parameter[0] + " into prefix filename.";
                 counter = new List<int>();
                 counter.Add(0);

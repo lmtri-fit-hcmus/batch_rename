@@ -26,6 +26,7 @@ using System.Text.Json;
 using System.Windows.Shapes;
 using DataFormats = System.Windows.Forms.DataFormats;
 using DragDropEffects = System.Windows.DragDropEffects;
+using Interface.Common;
 
 namespace BatchRename
 {
@@ -44,7 +45,7 @@ namespace BatchRename
         ObservableCollection<Item> _listFile = new ObservableCollection<Item>();
         ObservableCollection<Item> _listFolder = new ObservableCollection<Item>();
         ObservableCollection<RuleFormat> _listRule = new ObservableCollection<RuleFormat>();
-        ObservableCollection<IRule> _chosenRule = new ObservableCollection<IRule>();
+        ObservableCollection<RuleFormat> _chosenRule = new ObservableCollection<RuleFormat>();
 
         const String ALL_FILE = "All Files from Folder";
         BindingList<string> itemType = new BindingList<string>()
@@ -54,55 +55,9 @@ namespace BatchRename
 
         private void RibbonWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            // _listFile = e.Data.GetData(DataFormats.FileDrop, true);
-
-<<<<<<< Updated upstream
-            //var exeFolder = AppDomain.CurrentDomain.BaseDirectory;
-            //var dlls = new DirectoryInfo(exeFolder).GetFiles("dllRules/*.dll");
-            //foreach (var dll in dlls)
-            //{
-            //    var assembly = Assembly.LoadFile(dll.FullName);
-            //    var types = assembly.GetTypes();
-
-            //    foreach (var type in types)
-            //    {
-            //        if (type.IsClass)
-            //        {
-            //            if (typeof(IRule).IsAssignableFrom(type))
-            //            {
-            //                var temp_rule = Activator.CreateInstance(type) as IRule;
-            //                _listRule.Add(temp_rule);
-            //            }
-            //        }
-            //    }
-            //}
-            // 
             Request item = new Request();
             item.m_mid = BrMethods.BR_MID_GET_PLUGINS_INFO;
             _listRule = (PluginManager.getInstance().Handle(item)) as ObservableCollection<RuleFormat>;
-=======
-            //var exefolder = appdomain.currentdomain.basedirectory;
-            //var dlls = new directoryinfo(exefolder).getfiles("dllrules/*.dll");
-            //foreach (var dll in dlls)
-            //{
-            //    var assembly = assembly.loadfile(dll.fullname);
-            //    var types = assembly.gettypes();
-
-            //    foreach (var type in types)
-            //    {
-            //        if (type.isclass)
-            //        {
-            //            if (typeof(irule).isassignablefrom(type))
-            //            {
-            //                var temp_rule = activator.createinstance(type) as irule;
-            //                _listrule.add(temp_rule);
-            //            }
-            //        }
-            //    }
-            //}
-
-
->>>>>>> Stashed changes
 
             ComboType.ItemsSource = itemType;
             listRules.ItemsSource = _listRule;
@@ -134,7 +89,7 @@ namespace BatchRename
 
         private void listRules_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            
         }
         private void MainWindow_Closing(object sender, CancelEventArgs e)
         {
@@ -437,17 +392,13 @@ namespace BatchRename
 
             int index = listRules.SelectedIndex;
 
-            //if (rule.isEditable())
-            //{
-            //    if (rule.showUI() == false)
-            //        choseAdd = false;
-            //}
-
             // Call plugin manager to create a rule
             // Currently just work with add prefix rule
+
+            var rule = _listRule[index];
             Request item = new Request();
-            item.m_mid = BrMethods.BR_MID_ADD_PREFIX_ADD_RULE_CLICK;
-            var rule = (PluginManager.getInstance().Handle(item)) as IRule;
+            item.m_mid = PluginCloneMethodFactory.createMid(rule.ruleName);
+            rule = (PluginManager.getInstance().Handle(item)) as RuleFormat;
 
             if (rule != null)
             {
@@ -465,25 +416,28 @@ namespace BatchRename
             int index = rulesListBox.SelectedIndex;
             var rule = _chosenRule[index];
             txt_description.Text = rule.ruleDescription;
-            if (rule.isEditable())
-            {
+
+            Request r = new Request();
+            r.m_mid = PluginIsEditableMethodFactory.createMid(rule.ruleName);
+            object isEditable = (PluginManager.getInstance().Handle(r));
+            if(isEditable is bool && (bool)isEditable) { 
                 buttonEdit.Visibility = Visibility.Visible;
             }
-
-        }
+    }
 
         private void buttonEditClick(object sender, RoutedEventArgs e)
         {
             if (rulesListBox.SelectedItem == null)
                 return;
             int index = rulesListBox.SelectedIndex;
-            var rule = _chosenRule[index].Clone();
-            if (rule.showUI() == true)
-            {
+            Request item = new Request();
+            item.m_mid = PluginCloneMethodFactory.createMid(_chosenRule[index].ruleName);
+            var rule = (PluginManager.getInstance().Handle(item)) as RuleFormat;
+
+            if (rule != null) {
                 _chosenRule[index] = rule;
                 txt_description.Text = rule.ruleDescription;
             }
-
         }
 
         private void removeRule(object sender, RoutedEventArgs e)
@@ -524,7 +478,7 @@ namespace BatchRename
             int index = rulesListBox.SelectedIndex;
             if (index != -1)
             {
-                IRule temp = _chosenRule[index];
+                RuleFormat temp = _chosenRule[index];
                 for (int i = index; i > 0; i--)
                 {
                     _chosenRule[i] = _chosenRule[i - 1];
@@ -539,7 +493,7 @@ namespace BatchRename
             int index = rulesListBox.SelectedIndex;
             if (index != -1)
             {
-                IRule temp = _chosenRule[index];
+                RuleFormat temp = _chosenRule[index];
                 for (int i = index; i < _chosenRule.Count - 1; i++)
                 {
                     _chosenRule[i] = _chosenRule[i + 1];
@@ -554,7 +508,7 @@ namespace BatchRename
             int index = rulesListBox.SelectedIndex;
             if (index != -1 && index != 0)
             {
-                IRule temp = _chosenRule[index];
+                RuleFormat temp = _chosenRule[index];
                 _chosenRule[index] = _chosenRule[index - 1];
                 _chosenRule[index - 1] = temp;
                 rulesListBox.SelectedIndex = index - 1;
@@ -567,7 +521,7 @@ namespace BatchRename
 
             if (index != -1 && index != _chosenRule.Count - 1)
             {
-                IRule temp = _chosenRule[index];
+                RuleFormat temp = _chosenRule[index];
                 _chosenRule[index] = _chosenRule[index + 1];
                 _chosenRule[index + 1] = temp;
 
@@ -621,16 +575,15 @@ namespace BatchRename
 
             foreach (Item item in list)
                 item.newItemName = item.itemName;
-            foreach (IRule rule in _chosenRule)
+            foreach (RuleFormat rule in _chosenRule)
             {
                 Request in_resource = new Request();
-                in_resource.m_mid = BrMethods.BR_MID_ADD_PREFIX_RENAME;
+                in_resource.m_mid = PluginRenameMethodFactory.createMid(rule.ruleName);
                 in_resource.m_params = new Dictionary<string, object>();
                 in_resource.m_params.Add("list", list);
                 in_resource.m_params.Add("is_file", isFile);
                 in_resource.m_params.Add("params", rule.Parameter);
                 PluginManager.getInstance().Handle(in_resource);
-                //rule.Rename(list, isFile);
                 foreach (Item item in list)
                     item.itemName = item.newItemName;
             }
@@ -798,8 +751,9 @@ namespace BatchRename
                         ruleName = rule.ruleName,
                         ruleDescription = rule.ruleDescription,
                         Parameter = rule.Parameter,
+                        counter = rule.counter,
                         Replace = rule.Replace
-                    });
+                    }); ;
                 }
 
 
@@ -851,13 +805,14 @@ namespace BatchRename
                         {
                             if (item.ruleName == rule.ruleName)
                             {
-                                //IRule target = item.Clone();
-                                //target.ruleDescription = rule.ruleDescription;
-                                //target.Parameter = rule.Parameter;
-                                //target.counter = rule.counter;
-                                //target.Replace = rule.Replace;
+                                RuleFormat  target = new RuleFormat();
+                                target.ruleName = rule.ruleName;
+                                target.ruleDescription = rule.ruleDescription;
+                                target.Parameter = rule.Parameter;
+                                target.counter = rule.counter;
+                                target.Replace = rule.Replace;
 
-                                //this._chosenRule.Add(target);
+                                this._chosenRule.Add(target);
                             }
                         }
                     }
@@ -909,6 +864,7 @@ namespace BatchRename
                         ruleName = rule.ruleName,
                         ruleDescription = rule.ruleDescription,
                         Parameter = rule.Parameter,
+                        counter = rule.counter, 
                         Replace = rule.Replace
                     });
                 }
@@ -968,13 +924,14 @@ namespace BatchRename
                         {
                             if (item.ruleName == rule.ruleName)
                             {
-                                //IRule target = item.Clone();
-                                //target.ruleDescription = rule.ruleDescription;
-                                //target.Parameter = rule.Parameter;
-                                //target.counter = rule.counter;
-                                //target.Replace = rule.Replace;
+                                RuleFormat target = new RuleFormat();
+                                target.ruleName = rule.ruleName;
+                                target.ruleDescription = rule.ruleDescription;
+                                target.Parameter = rule.Parameter;
+                                target.counter = rule.counter;
+                                target.Replace = rule.Replace;
 
-                                //this._chosenRule.Add(target);
+                                this._chosenRule.Add(target);
                             }
                         }
                     }
