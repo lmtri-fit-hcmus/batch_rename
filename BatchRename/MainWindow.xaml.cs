@@ -753,7 +753,7 @@ namespace BatchRename
                         Parameter = rule.Parameter,
                         counter = rule.counter,
                         Replace = rule.Replace
-                    }); ;
+                    });
                 }
 
 
