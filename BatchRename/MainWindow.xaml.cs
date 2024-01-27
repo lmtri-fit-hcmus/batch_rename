@@ -751,6 +751,7 @@ namespace BatchRename
                         ruleName = rule.ruleName,
                         ruleDescription = rule.ruleDescription,
                         Parameter = rule.Parameter,
+                        counter = rule.counter,
                         Replace = rule.Replace
                     });
                 }
@@ -804,13 +805,14 @@ namespace BatchRename
                         {
                             if (item.ruleName == rule.ruleName)
                             {
-                                //IRule target = item.Clone();
-                                //target.ruleDescription = rule.ruleDescription;
-                                //target.Parameter = rule.Parameter;
-                                //target.counter = rule.counter;
-                                //target.Replace = rule.Replace;
+                                RuleFormat  target = new RuleFormat();
+                                target.ruleName = rule.ruleName;
+                                target.ruleDescription = rule.ruleDescription;
+                                target.Parameter = rule.Parameter;
+                                target.counter = rule.counter;
+                                target.Replace = rule.Replace;
 
-                                //this._chosenRule.Add(target);
+                                this._chosenRule.Add(target);
                             }
                         }
                     }
@@ -862,6 +864,7 @@ namespace BatchRename
                         ruleName = rule.ruleName,
                         ruleDescription = rule.ruleDescription,
                         Parameter = rule.Parameter,
+                        counter = rule.counter, 
                         Replace = rule.Replace
                     });
                 }
@@ -921,13 +924,14 @@ namespace BatchRename
                         {
                             if (item.ruleName == rule.ruleName)
                             {
-                                //IRule target = item.Clone();
-                                //target.ruleDescription = rule.ruleDescription;
-                                //target.Parameter = rule.Parameter;
-                                //target.counter = rule.counter;
-                                //target.Replace = rule.Replace;
+                                RuleFormat target = new RuleFormat();
+                                target.ruleName = rule.ruleName;
+                                target.ruleDescription = rule.ruleDescription;
+                                target.Parameter = rule.Parameter;
+                                target.counter = rule.counter;
+                                target.Replace = rule.Replace;
 
-                                //this._chosenRule.Add(target);
+                                this._chosenRule.Add(target);
                             }
                         }
                     }
