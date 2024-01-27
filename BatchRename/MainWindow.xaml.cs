@@ -56,6 +56,7 @@ namespace BatchRename
         {
             // _listFile = e.Data.GetData(DataFormats.FileDrop, true);
 
+<<<<<<< Updated upstream
             //var exeFolder = AppDomain.CurrentDomain.BaseDirectory;
             //var dlls = new DirectoryInfo(exeFolder).GetFiles("dllRules/*.dll");
             //foreach (var dll in dlls)
@@ -79,6 +80,29 @@ namespace BatchRename
             Request item = new Request();
             item.m_mid = BrMethods.BR_MID_GET_PLUGINS_INFO;
             _listRule = (PluginManager.getInstance().Handle(item)) as ObservableCollection<RuleFormat>;
+=======
+            //var exefolder = appdomain.currentdomain.basedirectory;
+            //var dlls = new directoryinfo(exefolder).getfiles("dllrules/*.dll");
+            //foreach (var dll in dlls)
+            //{
+            //    var assembly = assembly.loadfile(dll.fullname);
+            //    var types = assembly.gettypes();
+
+            //    foreach (var type in types)
+            //    {
+            //        if (type.isclass)
+            //        {
+            //            if (typeof(irule).isassignablefrom(type))
+            //            {
+            //                var temp_rule = activator.createinstance(type) as irule;
+            //                _listrule.add(temp_rule);
+            //            }
+            //        }
+            //    }
+            //}
+
+
+>>>>>>> Stashed changes
 
             ComboType.ItemsSource = itemType;
             listRules.ItemsSource = _listRule;
